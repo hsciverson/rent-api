@@ -1,1 +1,25 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.4.RELEASE'
+}
+
+repositories {
+    mavenCentral()
+}
+
 apply plugin: 'java'
+apply plugin: 'io.spring.dependency-management'
+
+
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-jersey")
+    implementation("org.springframework.boot:spring-boot-starter-undertow")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-joda:2.7.5")
+
+    testImplementation "junit:junit"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation 'io.rest-assured:rest-assured:3.0.5'
+    
+    
+}
