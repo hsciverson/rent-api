@@ -1,11 +1,10 @@
 package com.rent;
 
 import org.junit.Test;
-import org.junit.runners.Parameterized;
 
 import javax.ws.rs.core.MediaType;
-
-import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
@@ -40,5 +39,22 @@ public class RentTest extends ApiTestBase {
                 .then()
                 .statusCode(200)
                 .body("address", is("Nan Jing Road5"));
+    }
+
+    @Test
+    public void add_new_apartment() {
+        Map<String, Object> apartment = new HashMap<>();
+        apartment.put("id", "11");
+        apartment.put("address", "Xian Road");
+
+        given()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(apartment)
+                .when()
+                .post("/apartments")
+                .then()
+                .statusCode(201)
+                .body("id", is("11"))
+                .body("address", is("Xian Road"));
     }
 }

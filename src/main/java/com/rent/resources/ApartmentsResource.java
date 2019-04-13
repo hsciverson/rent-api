@@ -1,12 +1,12 @@
 package com.rent.resources;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
+import javax.ws.rs.core.Response;
+import java.net.URI;
 import java.util.List;
+
+import static com.rent.resources.ApartmentDatabase.apartments;
 
 @Path("apartments")
 public class ApartmentsResource {
@@ -27,17 +27,13 @@ public class ApartmentsResource {
                 .orElseThrow(RuntimeException::new);
     }
 
-    private List<Apartment> apartments() {
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addApartment(Apartment apartment) {
 
-        List<Apartment> apartments = new ArrayList<>();
-
-        for (int i = 0; i < 10; i++) {
-            Apartment apartment = new Apartment();
-            apartment.setId(String.valueOf(i));
-            apartment.setAddress("Nan Jing Road" + i);
-            apartments.add(apartment);
-        }
-
-        return apartments;
+        List<Apartment> apartments = apartments();
+        apartments.add(apartment);
+        return Response.created(URI.create("/apartments/" + apartment.getId())).entity(apartment).build();
     }
+
 }
