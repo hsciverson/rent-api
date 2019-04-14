@@ -1,0 +1,62 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rent.mappers.PropertyMapper">
+
+    <insert id="insert" useGeneratedKeys="true">
+        <selectKey keyProperty="property.uuid" resultType="String" order="BEFORE">
+            SELECT HEX(ORDERED_UUID(UUID()));
+        </selectKey>
+
+        INSERT INTO PROPERTIES
+        (
+        UUID,
+        ADDRESS,
+        SUBDISTRICT,
+        TYPE,
+        AREA,
+        BEDS,
+        HALLS,
+        BATHS,
+        PRICE,
+        CREATED_AT,
+        AVAILABLE_AT,
+        CREATED_BY
+        )
+        VALUES
+        (
+        UNHEX(#{property.uuid}),
+        #{property.address},
+        #{property.subDistrict},
+        #{property.type},
+        #{property.area},
+        #{property.beds},
+        #{property.halls},
+        #{property.baths},
+        #{property.price},
+        #{property.createdAt},
+        #{property.availableAt},
+        #{property.createdBy}
+        );
+    </insert>
+
+
+    <select id="uuid" resultType="com.rent.domain.Property">
+        SELECT
+        HEX(UUID) AS UUID,
+        ADDRESS,
+        SUBDISTRICT,
+        TYPE,
+        AREA,
+        BEDS,
+        HALLS,
+        BATHS,
+        PRICE,
+        CREATED_AT,
+        AVAILABLE_AT,
+        CREATED_BY
+        FROM PROPERTIES
+        WHERE UUID = UNHEX(#{uuid})
+    </select>
+
+</mapper>

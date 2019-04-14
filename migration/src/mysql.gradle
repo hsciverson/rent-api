@@ -1,0 +1,13 @@
+def properties = new Properties()
+properties.load(project.file("migration/src/main/resources/db.properties").newReader())
+
+flyway {
+    driver = properties.getProperty("db.driver")
+    url = properties.getProperty("db.url")
+    user = properties.getProperty("db.user")
+    password = properties.getProperty("db.password")
+    schemas = [properties.getProperty("db.schema")]
+    table = 'smarter_schema_version'
+    locations = ["filesystem:${projectDir}/migration/src/main/resources/migration"]
+    sqlMigrationPrefix = 'MySQL-'
+}
