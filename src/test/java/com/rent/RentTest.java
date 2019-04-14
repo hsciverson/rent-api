@@ -52,8 +52,8 @@ public class RentTest extends ApiTestBase {
                 apartment.put("halls","1");
                 apartment.put("baths","1");
                 apartment.put("price","2000");
-//                apartment.put("createdAt","2019-04-13");
-//                apartment.put("availableAt","2019-04-30");
+                apartment.put("createdAt","2015-04-17T06:06:51.00Z");
+                apartment.put("availableAt","2015-04-30T06:06:51.00Z");
                 apartment.put("createdBy","中介007");
 
         given()

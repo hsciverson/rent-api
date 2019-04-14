@@ -34,8 +34,8 @@
         #{property.halls},
         #{property.baths},
         #{property.price},
-        #{property.createdAt},
-        #{property.availableAt},
+        #{property.createdAt, typeHandler=com.rent.typehandlers.DateTimeTypeHandler},
+        #{property.availableAt, typeHandler=com.rent.typehandlers.DateTimeTypeHandler},
         #{property.createdBy}
         );
     </insert>

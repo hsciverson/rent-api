@@ -17,9 +17,9 @@ public class Property {
     private Integer halls;
     private Integer baths;
 
-
     private DateTime createdAt;
     private DateTime availableAt;
+
     private String createdBy;
 
     public String getUuid() {
